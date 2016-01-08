@@ -1,6 +1,6 @@
 <?php
 
-namespace XmlDsig;
+namespace Iwalpola\XmlDigitalSignature;
 
 /**
  * Produces an XML digital signature compatible with the recommendations of the W3.
