@@ -6,19 +6,75 @@ This package allows signing of arbitrary data and whole XML documents using XML 
 
 ### Installation
 
-add "iwalpola/xmldigitalsignature" to jour composer.json  requirements and run "composer update"
+run
 
-add Iwalpola\XmlDigitalSignature\XmlDigitalSignatureServiceProvider::class to the "providers" array of config/app.php in your Laravel Project's root directory
+```sh
+composer require "iwalpola/laravelxmldigitalsignature"
+```
 
-and
+followed by
 
-add 'XmlDigitalSignature' => Iwalpola\XmlDigitalSignature\XmlDigitalSignatureFacade::class to the "aliases" array of config/app.php in your Laravel Project root directory
+```sh
+composer update
+```
+
+add 
+
+```php
+Iwalpola\XmlDigitalSignature\XmlDigitalSignatureServiceProvider::class
+```
+
+to the "providers" array of config/app.php in your Laravel Project's root directory
+
+and add
+
+```php
+'XmlDigitalSignature' => Iwalpola\XmlDigitalSignature\XmlDigitalSignatureFacade::class
+```
+to the "aliases" array of config/app.php in your Laravel Project root directory
 
 ### Usage
 
-simply add "use XmlDigitalSignature;" anywhere you're using this package
+simply add 
 
-From then on, any method of this class can be accessed via XmlDigitalSignature:method($arguments)
+```php
+use XmlDigitalSignature;
+```
+at the top of any file in which you're using this package
+
+From then on, any method of this class can be accessed via XmlDigitalSignature::method($arguments)
+
+```php
+XmlDigitalSignature::setCryptoAlgorithm(1);
+XmlDigitalSignature::setDigestMethod('sha512');
+XmlDigitalSignature::forceStandalone();
+
+try
+{
+    XmlDigitalSignature::loadPrivateKey(storage_path('keys/private.pem'), 'MrMarchello');
+    XmlDigitalSignature::loadPublicKey(storage_path('keys/public.pem'));
+    XmlDigitalSignature::loadPublicXmlKey(storage_path('keys/public.xml'));
+}
+catch (\UnexpectedValueException $e)
+{
+    print_r($e);
+    exit(1);
+}
+
+try
+{
+    XmlDigitalSignature::addObject('Lorem ipsum dolor sit amet');
+    XmlDigitalSignature::sign();
+    XmlDigitalSignature::verify();
+}
+catch (\UnexpectedValueException $e)
+{
+    print_r($e);
+    exit(1);
+}
+
+dd(XmlDigitalSignature::getSignedDocument());   
+```
 
 ### Digest (hashing) methods
 

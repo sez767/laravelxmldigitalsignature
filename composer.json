@@ -13,7 +13,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Iwalpola\\XmlDigitalSignature\\": "src/"
+            "Iwalpola\\XmlDigitalSignature\\": "src"
         }
     }
 }
