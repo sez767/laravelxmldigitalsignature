@@ -1,10 +1,24 @@
-# XML Digital Signature for PHP
+# XML Digital Signature Package for Laravel
 
-This library was created to sign arbitrary data and whole XML documents using XML digital signatures as per the [W3 recommendation](http://www.w3.org/TR/xmldsig-core/) using PHP. The code for this class was inspired by the [xmlseclibs library](https://code.google.com/p/xmlseclibs/), which I found impossible to work with due to its lack of documentation and the fact that the signed documents it produced did not validate properly.
-
-Should this class generate documents that do not validate (as there are many different specs for these signatures, of which I have tested only a handful), please contact me and I will do my best to provide support for your needs.
+This package allows signing of arbitrary data and whole XML documents using XML digital signatures as per the [W3 recommendation](http://www.w3.org/TR/xmldsig-core/) using PHP. The original class was written by MrMarchello (https://github.com/MrMarchello/), based on xmlseclibs (https://github.com/robrichards/xmlseclibs)
 
 ## Options for generating and signing documents (AKA how to use this lib)
+
+### Installation
+
+add "iwalpola/xmldigitalsignature" to jour composer.json  requirements and run "composer update"
+
+add Iwalpola\XmlDigitalSignature\XmlDigitalSignatureServiceProvider::class to the "providers" array of config/app.php in your Laravel Project's root directory
+
+and
+
+add 'XmlDigitalSignature' => Iwalpola\XmlDigitalSignature\XmlDigitalSignatureFacade::class to the "aliases" array of config/app.php in your Laravel Project root directory
+
+### Usage
+
+simply add "use XmlDigitalSignature;" anywhere you're using this package
+
+From then on, any method of this class can be accessed via XmlDigitalSignature:method($arguments)
 
 ### Digest (hashing) methods
 
